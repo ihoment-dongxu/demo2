@@ -37,20 +37,24 @@ public class ResultBean<T> implements Serializable {
         return status == SUCCESS;
     }
 
-    public static ResultBean success(){
-        return new ResultBean();
+    public static <T> ResultBean<T> success() {
+        return new ResultBean<>();
     }
 
-    public static ResultBean fail(){
-        return new ResultBean().setMessage("fail").setStatus(FAIL);
+    public static <T> ResultBean<T> fail() {
+        return new ResultBean<T>().setMessage("fail").setStatus(FAIL);
     }
 
-    public static ResultBean fail(String msg){
-        return new ResultBean().setMessage(msg).setStatus(FAIL);
+    public static <T> ResultBean<T> fail(String msg) {
+        return new ResultBean<T>().setMessage(msg).setStatus(FAIL);
     }
 
-    public static <T> ResultBean ok(T data){
-        return new ResultBean().setStatus(SUCCESS).setData(data);
+    public static <T> ResultBean<T> fail(Integer code, String msg) {
+        return new ResultBean<T>().setMessage(msg).setStatus(code);
+    }
+
+    public static <T> ResultBean<T> ok(T data) {
+        return new ResultBean<T>().setStatus(SUCCESS).setData(data);
     }
 
 

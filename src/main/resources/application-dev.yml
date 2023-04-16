@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+# openAi 密钥
+open-ai:
+  api-key: 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
+
+print-time:
+  cron: 0/10 * * * * ?

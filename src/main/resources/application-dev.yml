@@ -7,3 +7,31 @@ open-ai:
 
 print-time:
   cron: 0/10 * * * * ?
+
+spring:
+  shardingsphere:
+    datasource:
+      mall-master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://rm-cn-wwo37bofp000s6no.rwlb.rds.aliyuncs.com:3306/demo?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+        name: mall-master
+        username: dongxu
+        password: Jiuchubuyan5426
+        initialSize: 5
+        asyncInit: true
+        minIdle: 10
+        maxActive: 20
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 'x'
+        validation-query-timeout: 2000
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        useGlobalDataSourceStat: true
+        filters: slf4j
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 开启SQL显示
+    props:
+      sql.show: true

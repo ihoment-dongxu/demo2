@@ -24,7 +24,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 1000, multiplier = 1))
+    @Retryable(value = Exception.class, maxAttempts = 4, backoff = @Backoff(delay = 1000, multiplier = 1))
     public List<StudentVO> listStudent() {
         List<StudentDTO> studentList = Lists.newArrayList(getStudentDTO());
         return StudentConvert.INSTANCE.convert(studentList);

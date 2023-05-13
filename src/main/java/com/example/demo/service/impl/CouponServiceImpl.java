@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author dongxu
@@ -22,12 +23,17 @@ public class CouponServiceImpl implements CouponService {
     @Resource
     private CouponMapper couponMapper;
 
+    @Resource(name = "couponThreadPoolExecutor")
+    private ThreadPoolExecutor couponThreadPoolExecutor;
+
     @Override
     public Boolean insertCoupon(CouponSaveRequest request) {
-        request.setCouponCode(CouponCodeUtils.generateCouponCode());
-        Coupon coupon = CouponConvert.INSTANCE.convert(request);
-        int rows = couponMapper.insert(coupon);
-        return rows > 0;
+        couponThreadPoolExecutor.execute(() -> {
+            request.setCouponCode(CouponCodeUtils.generateCouponCode());
+            Coupon coupon = CouponConvert.INSTANCE.convert(request);
+            couponMapper.insert(coupon);
+        });
+        return Boolean.TRUE;
     }
 
     @Override

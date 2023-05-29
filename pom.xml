@@ -112,6 +112,13 @@
             <version>1.21</version>
         </dependency>
 
+        <!--    模版引擎freemarker    -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.32</version>
+        </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>

@@ -19,4 +19,11 @@ public interface CouponService {
     Boolean insertCoupon(CouponSaveRequest request);
 
     List<CouponVO> listCoupon();
+
+    /**
+     * 流式查询
+     *
+     * @return
+     */
+    List<CouponVO> selectByCursor();
 }

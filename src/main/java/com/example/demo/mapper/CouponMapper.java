@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.pojo.modle.Coupon;
+import org.apache.ibatis.cursor.Cursor;
 
 import java.util.List;
 
@@ -21,4 +22,11 @@ public interface CouponMapper extends BaseMapper<Coupon> {
         queryWrapper.eq(Coupon::getDisable, 0);
         return this.selectList(queryWrapper);
     }
+
+    /**
+     * 流式查询
+     *
+     * @return
+     */
+    Cursor<Coupon> selectByCursor();
 }

@@ -34,4 +34,10 @@ public class CouponController {
       List<CouponVO> couponList = couponService.listCoupon();
       return ResultBean.ok(couponList);
    }
+
+   @GetMapping(value = "/selectByCursor")
+   public ResultBean<List<CouponVO>> selectByCursor(){
+      List<CouponVO> couponList = couponService.selectByCursor();
+      return ResultBean.ok(couponList);
+   }
 }

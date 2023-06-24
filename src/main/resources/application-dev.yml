@@ -35,3 +35,14 @@ spring:
     # 开启SQL显示
     props:
       sql.show: true
+  # 设置单个文件大小
+  servlet:
+    multipart:
+      max-file-size: 50MB
+
+#minio文件服务器配置
+s3:
+  url: http://localhost:9000
+  accessKey: 4DQplXDbS3qt3mbVXqjU
+  secretKey: lS9WrirHRxwPpKg5stALfRkNUJRUE78juRJeQhb0
+  bucketName: file-bucket

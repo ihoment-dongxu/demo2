@@ -1,6 +1,7 @@
 package com.example.demo.pojo.result;
 
 import com.example.demo.utils.IdUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -57,10 +58,27 @@ public class ResultBean<T> implements Serializable {
         return new ResultBean<T>().setStatus(SUCCESS).setData(data);
     }
 
+    /**
+     * 判断是否有异常。如果有，则抛出异常
+     * 如果没有，则返回数据
+     */
+    @JsonIgnore
+    public T getCheckedData() {
+        checkError();
+        return data;
+    }
+
+    private void checkError() {
+        if (status == SUCCESS) {
+            return;
+        }
+        throw new RuntimeException(message);
+    }
 
     public static void main(String[] args) {
         String data = "data";
         ResultBean ok = ResultBean.ok(data);
+        String checkedData = ResultBean.ok(data).getCheckedData();
         System.out.println(ok.getStatus());
         System.out.println(ok.getData());
         System.out.println(ok.getMessage());

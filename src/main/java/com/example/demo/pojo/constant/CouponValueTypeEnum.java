@@ -1,6 +1,7 @@
 package com.example.demo.pojo.constant;
 
 import com.example.demo.service.common.IntArrayValuable;
+import com.example.demo.service.common.StringArrayValuable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -12,7 +13,7 @@ import java.util.Arrays;
  */
 @AllArgsConstructor
 @Getter
-public enum CouponValueTypeEnum implements IntArrayValuable {
+public enum CouponValueTypeEnum implements IntArrayValuable, StringArrayValuable {
     FIXED_AMOUNT(0, "固定金额"),
     PERCENTAGE(1, "百分比");
     private int type;
@@ -20,8 +21,16 @@ public enum CouponValueTypeEnum implements IntArrayValuable {
 
     public static int[] ARRAYS = Arrays.stream(CouponValueTypeEnum.values()).mapToInt(CouponValueTypeEnum::getType).toArray();
 
+    public static String[] DESC_ARRAYS = Arrays.stream(CouponValueTypeEnum.values()).map(CouponValueTypeEnum::getDesc).toArray(String[]::new);
+
     @Override
-    public int[] array() {
+    public int[] intArray() {
         return ARRAYS;
+    }
+
+
+    @Override
+    public String[] strArray() {
+        return DESC_ARRAYS;
     }
 }

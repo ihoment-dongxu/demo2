@@ -24,7 +24,7 @@ public enum CommonStatusEnum implements IntArrayValuable {
     public static final int[] ARRAYS = Arrays.stream(values()).mapToInt(CommonStatusEnum::getStatus).toArray();
 
     @Override
-    public int[] array() {
+    public int[] intArray() {
         return ARRAYS;
     }
 }

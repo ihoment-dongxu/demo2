@@ -1,6 +1,6 @@
 package com.example.demo.pojo.request.coupon;
 
-import com.example.demo.anno.InEnum;
+import com.example.demo.anno.InEnumIntValue;
 import com.example.demo.pojo.constant.CouponValueTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -29,10 +29,11 @@ public class CouponSaveRequest {
     private BigDecimal value;
 
     @ApiModelProperty("类型：0->金额, 1->百分比")
-    @InEnum(value = CouponValueTypeEnum.class, message = "必须在指定范围内 {value}")
+    @InEnumIntValue(value = CouponValueTypeEnum.class, message = "必须在指定范围内 {value}")
     private Integer valueType;
 
     @ApiModelProperty("货币")
+//    @InEnumStringValue(value = CouponValueTypeEnum.class,message = "必须在指定范围内 {value}")
     private String currency;
 
     @ApiModelProperty("每人限领张数")

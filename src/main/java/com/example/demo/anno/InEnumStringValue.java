@@ -1,6 +1,6 @@
 package com.example.demo.anno;
 
-import com.example.demo.service.common.IntArrayValuable;
+import com.example.demo.service.common.StringArrayValuable;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -21,13 +21,13 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(
-        validatedBy = InEnumValidator.class
+        validatedBy = InEnumStringValueValidator.class
 )
-public @interface InEnum {
+public @interface InEnumStringValue {
     /**
-     * 实现了IntArrayValuable的类
+     * 实现了StringArrayValuable的类
      */
-    Class<? extends IntArrayValuable> value();
+    Class<? extends StringArrayValuable> value();
 
     String message() default "必须在指定范围 {value}";
 

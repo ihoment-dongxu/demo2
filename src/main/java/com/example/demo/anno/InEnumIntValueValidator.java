@@ -10,22 +10,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * InEnum指定的验证器
+ * InEnumIntValue指定的验证器
  *
  * @author dongxu
  * @create 2023-06-25 下午4:17
  */
-public class InEnumValidator implements ConstraintValidator<InEnum, Integer> {
+public class InEnumIntValueValidator implements ConstraintValidator<InEnumIntValue, Integer> {
 
     private List<Integer> values;
 
     @Override
-    public void initialize(InEnum annotation) {
+    public void initialize(InEnumIntValue annotation) {
         IntArrayValuable[] values = annotation.value().getEnumConstants();
         if (values.length == 0) {
             this.values = Collections.emptyList();
         } else {
-            this.values = Arrays.stream(values[0].array()).boxed().collect(Collectors.toList());
+            this.values = Arrays.stream(values[0].intArray()).boxed().collect(Collectors.toList());
         }
     }
 

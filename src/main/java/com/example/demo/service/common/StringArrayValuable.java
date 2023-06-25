@@ -6,11 +6,11 @@ package com.example.demo.service.common;
  * @author dongxu
  * @create 2023-06-25 下午4:34
  */
-public interface IntArrayValuable {
+public interface StringArrayValuable {
     /**
-     * 用于生成int数组
+     * 用于生成String数组
      *
-     * @return int数组
+     * @return String数组
      */
-    int[] intArray();
+    String[] strArray();
 }

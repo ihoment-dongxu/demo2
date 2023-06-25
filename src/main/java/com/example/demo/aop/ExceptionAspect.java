@@ -55,7 +55,7 @@ public class ExceptionAspect {
             }
         } finally {
             // 告警
-            this.errorAlarm(joinPoint, throwable);
+//            this.errorAlarm(joinPoint, throwable);
         }
         assert response != null;
         // 向Header中设置接口实际执行时间

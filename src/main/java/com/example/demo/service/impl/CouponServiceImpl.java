@@ -39,6 +39,7 @@ public class CouponServiceImpl implements CouponService {
     public Boolean insertCoupon(CouponSaveRequest request) {
         couponThreadPoolExecutor.execute(() -> {
             request.setCouponCode(CouponCodeUtils.generateCouponCode());
+            request.setValueType(2);
             Coupon coupon = CouponConvert.INSTANCE.convert(request);
             couponMapper.insert(coupon);
         });

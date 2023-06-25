@@ -196,6 +196,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!--   解决自定义检验枚举不生效的问题   -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

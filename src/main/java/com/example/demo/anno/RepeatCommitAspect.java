@@ -7,6 +7,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -20,6 +21,7 @@ import java.util.Arrays;
  * @create 2023-07-01 下午4:07
  */
 @Aspect
+@Component
 public class RepeatCommitAspect {
 
     private static final ThreadLocal<String> KEY_CACHE = new ThreadLocal<>();

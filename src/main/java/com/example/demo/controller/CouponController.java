@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.anno.RepeatCommit;
 import com.example.demo.pojo.request.coupon.CouponSaveRequest;
 import com.example.demo.pojo.result.ResultBean;
 import com.example.demo.pojo.vo.coupon.CouponVO;
@@ -24,6 +25,7 @@ public class CouponController {
    private CouponService couponService;
 
    @PostMapping(value = "/save")
+   @RepeatCommit(interval = 3000)
    public ResultBean<Boolean> insertCoupon(@RequestBody @Valid CouponSaveRequest request){
       Boolean insertFlag = couponService.insertCoupon(request);
       return ResultBean.ok(insertFlag);

@@ -12,15 +12,15 @@ import lombok.Setter;
 public class BusinessException extends RuntimeException{
     private String msg;
 
-    private BusinessExceptionEnum exceptionEnum;
+    private ErrorEnum errorEnum;
 
-    public BusinessException(BusinessExceptionEnum exceptionEnum) {
-        this.exceptionEnum = exceptionEnum;
+    public BusinessException(ErrorEnum errorEnum) {
+        this.errorEnum = errorEnum;
     }
 
-    public BusinessException(BusinessExceptionEnum exceptionEnum, String msg) {
+    public BusinessException(ErrorEnum errorEnum, String msg) {
         super(msg);
-        this.exceptionEnum = exceptionEnum;
+        this.errorEnum = errorEnum;
         this.msg = msg;
     }
 

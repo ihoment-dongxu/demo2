@@ -1,7 +1,8 @@
 package com.example.demo.config;
 
 import com.example.demo.exception.BusinessException;
-import com.example.demo.exception.BusinessExceptionEnum;
+import com.example.demo.exception.CommonExceptionEnum;
+import com.example.demo.exception.ErrorEnum;
 import com.example.demo.pojo.result.ResultBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,8 +24,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = BusinessException.class)
     public <T> ResultBean<T> businessExceptionHandler(HttpServletRequest req, BusinessException e) {
-        String desc = Optional.ofNullable(e).map(BusinessException::getExceptionEnum).map(BusinessExceptionEnum::getDescription).orElse("");
-        Integer code = Optional.ofNullable(e).map(BusinessException::getExceptionEnum).map(BusinessExceptionEnum::getCode).orElse(0);
+        String desc = Optional.ofNullable(e).map(BusinessException::getErrorEnum).map(ErrorEnum::getMessage).orElse("");
+        Integer code = Optional.ofNullable(e).map(BusinessException::getErrorEnum).map(ErrorEnum::getCode).orElse(0);
         String msg = Optional.ofNullable(e).map(BusinessException::getMsg).orElse("");
 
         String info;
@@ -38,5 +39,22 @@ public class GlobalExceptionHandler {
         return ResultBean.fail(code, info);
     }
 
+    /**
+     * 处理空指针的异常
+     */
+    @ExceptionHandler(value = NullPointerException.class)
+    public ResultBean exceptionHandler(NullPointerException exception) {
+        log.error("null point exception！The reason is: ", exception);
+        return ResultBean.fail(CommonExceptionEnum.SYSTEM_ERROR);
+    }
+
+    /**
+     * 未知异常
+     */
+    @ExceptionHandler(value = Exception.class)
+    public ResultBean systemExceptionHandler(Exception e) {
+        log.error("system exception！The reason is：{}", e.getMessage(), e);
+        return ResultBean.fail(CommonExceptionEnum.SYSTEM_ERROR);
+    }
 
 }

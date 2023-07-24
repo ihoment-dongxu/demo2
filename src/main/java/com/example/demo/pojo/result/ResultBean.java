@@ -1,5 +1,6 @@
 package com.example.demo.pojo.result;
 
+import com.example.demo.exception.ErrorEnum;
 import com.example.demo.utils.IdUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -48,6 +49,10 @@ public class ResultBean<T> implements Serializable {
 
     public static <T> ResultBean<T> fail(String msg) {
         return new ResultBean<T>().setMessage(msg).setStatus(FAIL);
+    }
+
+    public static <T> ResultBean<T> fail(ErrorEnum errorEnum) {
+        return new ResultBean<T>().setMessage(errorEnum.getMessage()).setStatus(errorEnum.getCode());
     }
 
     public static <T> ResultBean<T> fail(Integer code, String msg) {

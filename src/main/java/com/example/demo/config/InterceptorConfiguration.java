@@ -6,12 +6,19 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
+
 /**
+ * 配置所有拦截器
+ *
  * @author dongxu
  * @create 2023-04-05 下午3:21
  */
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
+
+    @Resource
+    private CollectorInterceptor collectorInterceptor;
 
     /**
      * 解决跨域请求
@@ -47,5 +54,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
         registration.addPathPatterns("/portal/ping")
                 // 设置放行的路径 （不走拦截器）
                 .excludePathPatterns("/portal/pong");
+
+        registry.addInterceptor(collectorInterceptor)
+                .addPathPatterns("/**");
     }
 }

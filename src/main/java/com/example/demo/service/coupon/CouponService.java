@@ -1,5 +1,6 @@
 package com.example.demo.service.coupon;
 
+import com.example.demo.pojo.request.coupon.CouponReceiveRequest;
 import com.example.demo.pojo.request.coupon.CouponSaveRequest;
 import com.example.demo.pojo.vo.coupon.CouponVO;
 
@@ -26,4 +27,12 @@ public interface CouponService {
      * @return
      */
     List<CouponVO> selectByCursor();
+
+    /**
+     * 优惠券领取
+     *
+     * @param request
+     * @return
+     */
+    Boolean receiveCoupon(CouponReceiveRequest request);
 }

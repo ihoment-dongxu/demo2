@@ -2,10 +2,15 @@ package com.example.demo.service.impl;
 
 import com.example.demo.assembler.coupon.CouponConvert;
 import com.example.demo.mapper.CouponMapper;
+import com.example.demo.pojo.constant.CouponTypeEnum;
+import com.example.demo.pojo.dto.coupon.ReceiveCouponDTO;
 import com.example.demo.pojo.modle.Coupon;
+import com.example.demo.pojo.request.coupon.CouponReceiveRequest;
 import com.example.demo.pojo.request.coupon.CouponSaveRequest;
 import com.example.demo.pojo.vo.coupon.CouponVO;
 import com.example.demo.service.coupon.CouponService;
+import com.example.demo.service.factory.ReceiveCouponStrategyFactory;
+import com.example.demo.service.strategy.coupon.receive.AbstractReceiveCouponStrategy;
 import com.example.demo.utils.CouponCodeUtils;
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -81,6 +86,13 @@ public class CouponServiceImpl implements CouponService {
             e.printStackTrace();
         }
         return CouponConvert.INSTANCE.convertList(coupons);
+    }
+
+    @Override
+    public Boolean receiveCoupon(CouponReceiveRequest request) {
+        AbstractReceiveCouponStrategy<ReceiveCouponDTO> receiveCouponStrategy = ReceiveCouponStrategyFactory.getFactoryByName(CouponTypeEnum.NORMAL);
+        receiveCouponStrategy.receiveCoupon(request);
+        return true;
     }
 
 }

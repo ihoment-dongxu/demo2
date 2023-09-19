@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.anno.RepeatCommit;
+import com.example.demo.pojo.request.coupon.CouponReceiveRequest;
 import com.example.demo.pojo.request.coupon.CouponSaveRequest;
 import com.example.demo.pojo.result.ResultBean;
 import com.example.demo.pojo.vo.coupon.CouponVO;
@@ -41,5 +42,11 @@ public class CouponController {
    public ResultBean<List<CouponVO>> selectByCursor(){
       List<CouponVO> couponList = couponService.selectByCursor();
       return ResultBean.ok(couponList);
+   }
+
+   @PostMapping(value = "/receive")
+   public ResultBean<Boolean> receiveCoupon(@RequestBody @Valid CouponReceiveRequest request){
+      Boolean flag = couponService.receiveCoupon(request);
+      return ResultBean.ok(flag);
    }
 }

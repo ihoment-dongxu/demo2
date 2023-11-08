@@ -2,4 +2,4 @@ spring:
   application:
     name: com.example.demo
   profiles:
-    active: dev
+    active: test

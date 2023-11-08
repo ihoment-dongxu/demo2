@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -20,6 +21,7 @@ import java.util.TimeZone;
 @EnableAsync
 @EnableScheduling
 @EnableConfigurationProperties
+@EnableBatchProcessing
 @SpringBootApplication(
         exclude = {DataSourceAutoConfiguration.class},
         scanBasePackages = {"com.example.demo"}

@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+# openAi 密钥
+open-ai:
+  api-key: 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
+
+print-time:
+  cron: 0/10 * * * * ?
+
+spring:
+  shardingsphere:
+    datasource:
+      mall-master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/springbatch
+        name: mall-master
+        username: root
+        password: 220381
+        initialSize: 5
+        asyncInit: true
+        minIdle: 10
+        maxActive: 20
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 'x'
+        validation-query-timeout: 2000
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        useGlobalDataSourceStat: true
+        filters: slf4j
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 开启SQL显示
+    props:
+      sql.show: true
+  # 设置单个文件大小
+  servlet:
+    multipart:
+      max-file-size: 50MB
+
+#minio文件服务器配置
+s3:
+  url: http://localhost:9000
+  accessKey: 4DQplXDbS3qt3mbVXqjU
+  secretKey: lS9WrirHRxwPpKg5stALfRkNUJRUE78juRJeQhb0
+  bucketName: file-bucket

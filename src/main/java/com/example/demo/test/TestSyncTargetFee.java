@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import okhttp3.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +15,10 @@ import java.util.List;
  */
 public class TestSyncTargetFee {
 
-    private static final String AUTHORIZATION = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWUiOjE3MjIyMjMzNDgsImlzcyI6Imlob21lbnQiLCJ1c2VySWQiOjQxMzUsInVzZXJuYW1lIjoieHVfZG9uZyJ9.W_aA56hZAno66bCMIIbinVLvXyx04SJT2Cg2w0P-apw";
+    private static final String AUTHORIZATION = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblRpbWUiOjE3MzYxMjkyMTMsImlzcyI6Imlob21lbnQiLCJ1c2VySWQiOjQxMzUsInVzZXJuYW1lIjoieHVfZG9uZyJ9.LVOAtF_E9YYxUbC6KU2vWBuZ5rDtYkznOIL9gHBFb4I";
     private static final String BASE_URL = "https://backend.lanjingerp.com/trade/rest";
     private static final String SHOPIFY_SYNC_URL = BASE_URL + "/v1/shopify-deliver-order-status/fee/sync";
+    private static final String SHOPIFY_FBA_SYNC_URL = BASE_URL + "/v1/shopify-deliver-order-status/fba-fee/sync";
     private static final String OUTBOUND_SYNC_URL = BASE_URL + "/v1/oversea-house/outbound-fee/sync";
     private static final String TIKTOK_SYNC_URL = BASE_URL + "/v1/tiktok-delivery-package/fee/sync";
     private static final String MALL_SYNC_URL = "https://mall-admin.api.govee.com/app-mall-backend/v1/delivery-order/schedule/synWeight";
@@ -26,15 +26,15 @@ public class TestSyncTargetFee {
     @SneakyThrows
     public static void main(String[] args) {
         // 输入一个时间范围
-        Long startAt = 1672502400000L;
-        Long endAt = 1722571880575L;
+        Long startAt = 1727712000000L;
+        Long endAt = 1736136882822L;
         Long syncStartAt;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         ShopifyDeliveryOrderShippingFeeSyncDTO dto = new ShopifyDeliveryOrderShippingFeeSyncDTO();
-        dto.setWarehouseList(Arrays.asList("GOODCANG","FBA","WINIT"));
-        dto.setStatusList(Arrays.asList(5, 7, 8));
+//        dto.setWarehouseList(Arrays.asList("FBA"));
+//        dto.setStatusList(Arrays.asList(5, 7, 8));
         do {
             long now = System.currentTimeMillis();
             // 从结束时间开始，每次减1天作为一个时间段
@@ -45,7 +45,7 @@ public class TestSyncTargetFee {
             System.out.println("本次执行时间段：" + sdf.format(new Date(syncStartAt)) + " 至 " + sdf.format(new Date(endAt)));
             MediaType mediaType = MediaType.parse("application/json");
             RequestBody body = RequestBody.create(mediaType, JSONUtil.toJSON(dto));
-            Request request = new Request.Builder().url(SHOPIFY_SYNC_URL).method("POST", body).addHeader("Authorization", AUTHORIZATION).addHeader("Content-Type", "application/json").build();
+            Request request = new Request.Builder().url(SHOPIFY_FBA_SYNC_URL).method("POST", body).addHeader("Authorization", AUTHORIZATION).addHeader("Content-Type", "application/json").build();
             // 每次用这段时间请求同步
             try {
                 Response response = client.newCall(request).execute();

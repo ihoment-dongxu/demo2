@@ -1,4 +1,4 @@
-package com.example.demo.practice.lock;
+package com.example.demo.practice.leetcode;
 
 /**
  * 704. 二分查找
